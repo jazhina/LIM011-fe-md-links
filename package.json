@@ -1,0 +1,32 @@
+{
+    "name": "md-links",
+    "version": "0.1.0",
+    "main": "index.js",
+    "directories": {
+      "test": "test"
+    },
+    "dependencies": {
+      "alejandraao-mdlinks": "^1.0.2",
+      "jest": "^24.9.0",
+      "prompt-confirm": "^2.0.4"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "test": "jest --coverage"
+    },
+
+    "keywords": [
+      "md",
+      "links",
+      "path",
+      "valitations",
+      "markdown"
+    ],
+    "author": "JazminRojas",
+    "license": "MIT",
+    "jest": "^24.9.0",
+    "bugs": {
+      "url": "https://github.com/jazhina/LIM011-fe-md-links"
+    },
+    "homepage": "https://github.com/jazhina/LIM011-fe-md-links"
+  }
