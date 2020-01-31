@@ -45,6 +45,5 @@
     "url": "https://github.com/jazhina/LIM011-fe-md-links/issues"
   },
   "author": "JazminRojas",
-  "license": "MIT",
-  "jest": "^24.9.0"
+  "license": "MIT"
 }
