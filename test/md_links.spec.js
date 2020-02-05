@@ -16,3 +16,16 @@ describe('REVISAR SI ES ARCHIVO O DIRECTORIO', () => {
     expect(false).toBe(false);
   });
 });
+describe('REVISAR SI ES UN ARCHIVO MD', () => {
+  it('ES UN ARCHIVO MD', () => {
+    expect(true).toBe(true);
+  });
+  it('NO ES UN ARCHIVO MD', () => {
+    expect(false).toBe(false);
+  });
+});
+describe('ARCHIVO MD BUSCA LINKS', () => {
+  it('ES UN ARCHIVO MD', () => {
+    expect(true).toBe(true);
+  });
+});
