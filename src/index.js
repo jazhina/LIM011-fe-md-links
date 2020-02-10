@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const marked = require('marked');
+const fetch = require('node-fetch');
 
 // Regresa una ruta absoluta
 const verificar = (ruta) => {
@@ -49,11 +50,41 @@ const extraerlink = (route) => {
   });
   return array;
 };
+
+const validarlink = (route) => {
+  const data = extraerlink(route);
+  const promesa = [];
+  data.forEach((e) => {
+    promesa.push(fetch(e.href)
+      .then((r) => {
+        let mensaje;
+        if (r.status >= 200 && r.status < 400) {
+          mensaje = 'OK';
+        } else {
+          mensaje = 'FAIL';
+        }
+        const obj = {
+          href: e.href,
+          text: e.text,
+          file: e.file,
+          status: r.status,
+          message: mensaje,
+        };
+        return obj;
+      }),
+    );
+  });
+  return Promise.all(promesa);
+};
+
 // const readFile = fs.readFileSync('./mds/example/read.md', 'utf8');
 // console.log(readFile);
 // console.log(archivo('./mds/example/read.md'));
 console.log(guardarArchivosMD('./mds/example'));
 console.log(extraerlink('./mds/example'));
+// console.log(validarlink('./mds/example/read.md'));
+Promise.all(validarlink('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md')).then((r) => console.log(r));
+
 // console.log(MD('./mds/example/read.md'));
 // console.log(verificar('./mds/example/read.md'));
 
