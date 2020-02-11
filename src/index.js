@@ -35,8 +35,10 @@ const guardarArchivosMD = (route) => {
   }
   return contenedor;
 };
-const readFile = (route) => fs.readFileSync(route, 'utf-8');
 
+// LEE EL ARCHIVO
+const readFile = (route) => fs.readFileSync(route, 'utf-8');
+// EXTRAE EL LINK,TEXTO Y RUTA
 const extraerlink = (route) => {
   const lib = new marked.Renderer();
   const array = [];
@@ -44,34 +46,40 @@ const extraerlink = (route) => {
   data.forEach((File) => {
     const contenido = readFile(File);
     lib.link = (Href, title, Text) => {
-      array.push({ href: Href, text: Text, file: File });
+      array.push({
+        href: Href,
+        text: Text,
+        file: File,
+      });
     };
     marked(contenido, { renderer: lib });
   });
   return array;
 };
 
+// VALIDA LOS LINKS Y RETORNA SI SON VALIDOS MENSAJE OK Y FAIL
 const validarlink = (route) => {
   const data = extraerlink(route);
   const promesa = [];
   data.forEach((e) => {
-    promesa.push(fetch(e.href)
-      .then((r) => {
-        let mensaje;
-        if (r.status >= 200 && r.status < 400) {
-          mensaje = 'OK';
-        } else {
-          mensaje = 'FAIL';
-        }
-        const obj = {
-          href: e.href,
-          text: e.text,
-          file: e.file,
-          status: r.status,
-          message: mensaje,
-        };
-        return obj;
-      }),
+    promesa.push(
+      fetch(e.href)
+        .then((r) => {
+          let mensaje;
+          if (r.status >= 200 && r.status < 400) {
+            mensaje = 'OK';
+          } else {
+            mensaje = 'FAIL';
+          }
+          const obj = {
+            href: e.href,
+            text: e.text,
+            file: e.file,
+            status: r.status,
+            message: mensaje,
+          };
+          return obj;
+        }),
     );
   });
   return Promise.all(promesa);
@@ -80,14 +88,21 @@ const validarlink = (route) => {
 // const readFile = fs.readFileSync('./mds/example/read.md', 'utf8');
 // console.log(readFile);
 // console.log(archivo('./mds/example/read.md'));
-console.log(guardarArchivosMD('./mds/example'));
-console.log(extraerlink('./mds/example'));
-// console.log(validarlink('./mds/example/read.md'));
-Promise.all(validarlink('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md')).then((r) => console.log(r));
-
+// console.log(guardarArchivosMD('./mds/example'));
+// console.log(extraerlink('./mds/example'));
+validarlink('./mds/example/read.md')
+  .then((resp) => {
+    console.log(resp);
+  });
 // console.log(MD('./mds/example/read.md'));
 // console.log(verificar('./mds/example/read.md'));
 
 module.exports = {
   verificar,
+  archivo,
+  MD,
+  guardarArchivosMD,
+  readFile,
+  extraerlink,
+  validarlink,
 };
