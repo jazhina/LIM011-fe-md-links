@@ -10,22 +10,27 @@ describe('TRAER RUTA ABSOLUTA', () => {
 });
 describe('REVISAR SI ES ARCHIVO O DIRECTORIO', () => {
   it('SI ES UN ARCHIVO REGRESA VERDADERO', () => {
-    expect(true).toBe(true);
+    expect(objfns.archivo('./mds/example/read.md')).toBe(true);
   });
   it('SI ES UN DIRECTORIO REGRESA FALSO', () => {
-    expect(false).toBe(false);
+    expect(objfns.archivo('./mds/example')).toBe(false);
   });
 });
 describe('REVISAR SI ES UN ARCHIVO MD', () => {
   it('ES UN ARCHIVO MD', () => {
-    expect(true).toBe(true);
+    expect(objfns.MD('./mds/example/read.md')).toBe(true);
   });
   it('NO ES UN ARCHIVO MD', () => {
-    expect(false).toBe(false);
+    expect(objfns.MD('./mds/example/index.html')).toBe(false);
   });
 });
-describe('ARCHIVO MD BUSCA LINKS', () => {
+
+describe('ARCHIVO GUARDA ARCHIVOS MD', () => {
   it('ES UN ARCHIVO MD', () => {
-    expect(true).toBe(true);
+    const respMD = ['/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/documento.md',
+      '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+      '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/test/example.md',
+      '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/test/informes/info.md'];
+    expect(objfns.guardarArchivosMD('./mds/example/read.md')).toBe(respMD);
   });
 });

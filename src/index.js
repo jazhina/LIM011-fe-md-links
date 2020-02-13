@@ -14,7 +14,7 @@ const verificar = (ruta) => {
 // Verifica si es un archivo
 const archivo = (ruta) => fs.statSync(ruta).isFile();
 
-// Trae la informacion en caso sea un archivo MD
+// Archivo MD
 const MD = (route) => path.extname(route) === '.md';
 
 // Guardar archivos MD en un arreglo
@@ -88,12 +88,13 @@ const validarlink = (route) => {
 // const readFile = fs.readFileSync('./mds/example/read.md', 'utf8');
 // console.log(readFile);
 // console.log(archivo('./mds/example/read.md'));
+
 // console.log(guardarArchivosMD('./mds/example'));
 // console.log(extraerlink('./mds/example'));
-validarlink('./mds/example/read.md')
+/* validarlink('./mds/example/read.md')
   .then((resp) => {
     console.log(resp);
-  });
+  }) */
 // console.log(MD('./mds/example/read.md'));
 // console.log(verificar('./mds/example/read.md'));
 
