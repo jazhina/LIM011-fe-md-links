@@ -4,15 +4,15 @@ const mdlinks = (path, options) => {
   const Resp = new Promise((resolve) => {
     resolve(valida.extraerlink(path));
   });
-  if (options === true) {
+  if (options.validate === true) {
     return valida.validarlink(path);
   }
   return Resp;
 };
 
-mdlinks('./mds/example/read.md', true)
+/* mdlinks('./mds/example/read.md', true)
   .then((resolve) => {
     console.log(resolve);
   });
-
+ */
 module.exports = mdlinks;
