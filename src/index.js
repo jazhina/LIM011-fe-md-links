@@ -91,10 +91,10 @@ const validarlink = (route) => {
 
 // console.log(guardarArchivosMD('./mds/example'));
 // console.log(extraerlink('./mds/example'));
-/* validarlink('./mds/example/read.md')
+validarlink('./mds/example/read.md')
   .then((resp) => {
     console.log(resp);
-  }) */
+  });
 // console.log(MD('./mds/example/read.md'));
 // console.log(verificar('./mds/example/read.md'));
 

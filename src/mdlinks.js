@@ -14,3 +14,5 @@ mdlinks('./mds/example/read.md', true)
   .then((resolve) => {
     console.log(resolve);
   });
+
+module.exports = mdlinks;
