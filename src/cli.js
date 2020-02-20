@@ -6,9 +6,10 @@ const cli = require('../src/clioptions.js');
 console.log(`Hello World ${args}`); */
 
 const path = process.argv[2];
-const option = process.argv[3];
-console.log(option);
+const options = process.argv[3];
+const option2 = process.argv[4];
+// console.log(options);
 
-cli(path, option)
+cli(path, options, option2)
   .then((resp) => console.log(resp))
   .catch((error) => console.log(error));
