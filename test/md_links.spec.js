@@ -1,10 +1,5 @@
 const objfns = require('../src/index.js');
 
-/* fetchMock.mock('*', 200);
-const res = await fetch('http://example.com');
-assert(res.ok);
-fetchMock.restore(); */
-
 describe('TRAER RUTA ABSOLUTA', () => {
   it('Convertir la ruta  absoluta', () => {
     expect(objfns.verificar('./mds/example/read.md')).toBe('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md');
@@ -29,6 +24,7 @@ describe('REVISAR SI ES UN ARCHIVO MD', () => {
     expect(objfns.MD('./mds/example/index.html')).toBe(false);
   });
 });
+
 const respMD = ['/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/documento.md',
   '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
   '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/test/example.md',
@@ -48,7 +44,7 @@ const ltr = [
     file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
   },
   {
-    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch',
+    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
     file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
   },
@@ -68,16 +64,31 @@ const valida = [
     message: 'OK',
   },
   {
-    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch',
+    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
     file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
-    status: 200,
-    message: 'OK',
+    status: 404,
+    message: 'FAIL',
   },
 ];
+/* describe('STATS', () => {
+  it('stats', (done) => {
+    expect(stat.stats('./mds/example/read.md')).toEqual(totalunique);
+    done();
+  });
+});
+const totalunique = [
+  {
+    Total: 2,
+    Unique: 2,
+  },
+]; */
 describe('VALIDAR LINK', () => {
   it('VALIDAR LINK', (done) => {
-    expect(objfns.validarlink('./mds/example/read.md')).toEqual(valida);
-    done();
+    objfns.validarlink('./mds/example/read.md')
+      .then((resp) => {
+        expect(resp).toEqual(valida);
+        done();
+      });
   });
 });

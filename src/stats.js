@@ -1,5 +1,6 @@
 const mdlinks = require('../src/mdlinks.js');
 
+// eslint-disable-next-line arrow-body-style
 const stats = (path, option) => {
   return mdlinks(path, { validate: option })
     .then((data) => {

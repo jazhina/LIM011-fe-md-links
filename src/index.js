@@ -86,7 +86,7 @@ const validarlink = (route) => {
 };
 
 // const readFile = fs.readFileSync('./mds/example/read.md', 'utf8');
-// console.log(readFile);
+// console.log(readFile('./mds/example/read.md'));
 // console.log(archivo('./mds/example/read.md'));
 
 // console.log(guardarArchivosMD('./mds/example'));

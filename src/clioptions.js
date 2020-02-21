@@ -38,21 +38,7 @@ const clioptions = (path, options, option2) => {
   }
   return resp;
 };
-
-/* clioptions('./mds/example/read.md', '--stats')
-
-  .then((res) => {
-    console.log(res);
-  }); */
-/* clioptions('./mds/example/read.md', '--validate')
-  .then((res) => {
-    console.log(res);
-  });
-clioptions('./mds/example/read.md', '--stats --validate')
-  .then((res) => {
-    console.log(res);
-  });
-clioptions('./mds/example/read.md')
+/* clioptions('./mds/example/read.md')
   .then((res) => {
     console.log(res);
   }); */
