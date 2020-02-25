@@ -22,7 +22,7 @@ const stats = (path, option) => mdlinks(path, { validate: option })
     }
     return obj;
   })
-  .catch((error) => console.log('Hubo un error', error));
+  .catch(Error('Hubo un error'));
 
 module.exports = stats;
 
