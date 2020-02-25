@@ -1,5 +1,9 @@
 const objfns = require('../src/index.js');
 
+const mdlinks = require('../src/mdlinks.js');
+
+const stats = require('../src/stats.js');
+
 describe('TRAER RUTA ABSOLUTA', () => {
   it('Convertir la ruta  absoluta', () => {
     expect(objfns.verificar('./mds/example/read.md')).toBe('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md');
@@ -71,18 +75,7 @@ const valida = [
     message: 'FAIL',
   },
 ];
-/* describe('STATS', () => {
-  it('stats', (done) => {
-    expect(stat.stats('./mds/example/read.md')).toEqual(totalunique);
-    done();
-  });
-});
-const totalunique = [
-  {
-    Total: 2,
-    Unique: 2,
-  },
-]; */
+
 describe('VALIDAR LINK', () => {
   it('VALIDAR LINK', (done) => {
     objfns.validarlink('./mds/example/read.md')
@@ -90,5 +83,76 @@ describe('VALIDAR LINK', () => {
         expect(resp).toEqual(valida);
         done();
       });
+  });
+});
+const respTrue = [
+  {
+    href: 'https://es.wikipedia.org/wiki/Markdown',
+    text: 'Markdown',
+    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    status: 200,
+    message: 'OK',
+  },
+  {
+    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
+    text: 'FETCH',
+    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    status: 404,
+    message: 'FAIL',
+  },
+];
+const respFalse = [
+  {
+    href: 'https://es.wikipedia.org/wiki/Markdown',
+    text: 'Markdown',
+    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    status: 200,
+    message: 'OK',
+  },
+  {
+    href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
+    text: 'FETCH',
+    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    status: 404,
+    message: 'FAIL',
+  },
+];
+describe('MDLINKS', () => {
+  it('mdlinks retorna hrfef, text,file,status,mesage ', (done) => {
+    mdlinks('./mds/example/read.md', { validate: true })
+      .then((resp) => {
+        expect(mdlinks(resp)).toEqual(respTrue);
+      });
+    done();
+  });
+  it('mdlinks retorna hrfef, text,file', (done) => {
+    mdlinks('./mds/example/read.md', { validate: false })
+      .then((resp) => {
+        expect(mdlinks(resp)).toEqual(respFalse);
+      });
+    done();
+  });
+});
+const totalunique = { Total: 2, Unique: 2 };
+
+const totaluniquebroken = {
+  Total: 2,
+  Unique: 2,
+  Broken: 1,
+};
+describe('STATS', () => {
+  it('stats total y unicos', (done) => {
+    stats('./mds/example/read.md', false)
+      .then((resp) => {
+        expect(stats(resp)).toEqual(totalunique);
+      });
+    done();
+  });
+  it('stats total,unicos,rotos', (done) => {
+    stats('./mds/example/read.md', true)
+      .then((resp) => {
+        expect(stats(resp)).toEqual(totaluniquebroken);
+      });
+    done();
   });
 });

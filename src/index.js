@@ -79,7 +79,8 @@ const validarlink = (route) => {
             message: mensaje,
           };
           return obj;
-        }),
+        })
+        .catch((error) => console.log('Hubo un error', error)),
     );
   });
   return Promise.all(promesa);

@@ -1,33 +1,33 @@
 const mdlinks = require('../src/mdlinks.js');
 
-// eslint-disable-next-line arrow-body-style
-const stats = (path, option) => {
-  return mdlinks(path, { validate: option })
-    .then((data) => {
-      const array = [];
-      data.forEach((element) => array.push(element.href));
-      const unicos = new Set(array);
-      const broken = data.filter((element) => element.message === 'FAIL');
-      let obj;
-      if (option === true) {
-        obj = {
-          Total: data.length,
-          Unique: unicos.size,
-          Broken: broken.length,
-        };
-      } else {
-        obj = {
-          Total: data.length,
-          Unique: unicos.size,
-        };
-      }
-      return obj;
-    });
-};
 
-/* stats('./mds/example/read.md', true)
+const stats = (path, option) => mdlinks(path, { validate: option })
+  .then((data) => {
+    const array = [];
+    data.forEach((element) => array.push(element.href));
+    const unicos = new Set(array);
+    const broken = data.filter((element) => element.message === 'FAIL');
+    let obj;
+    if (option === true) {
+      obj = {
+        Total: data.length,
+        Unique: unicos.size,
+        Broken: broken.length,
+      };
+    } else {
+      obj = {
+        Total: data.length,
+        Unique: unicos.size,
+      };
+    }
+    return obj;
+  })
+  .catch((error) => console.log('Hubo un error', error));
+
+module.exports = stats;
+
+
+/* stats('./mds/example/read.md', false)
   .then((res) => {
     console.log(res);
   }); */
-
-module.exports = stats;

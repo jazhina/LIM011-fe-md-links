@@ -10,9 +10,17 @@ const mdlinks = (path, options) => {
   return Resp;
 };
 
-/* mdlinks('./mds/example/read.md', true)
+/* mdlinks('./mds/example/read.md', { validate: true })
   .then((resolve) => {
     console.log(resolve);
   }); */
 
 module.exports = mdlinks;
+/* const Resp = new Promise((resolve, reject) => {
+  if (options.validate === true) {
+    return resolve(valida.validarlink(path));
+  } else {
+    return reject((error) => console.log(error)),
+  }
+});
+return Resp; */
