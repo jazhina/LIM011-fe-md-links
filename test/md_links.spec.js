@@ -128,22 +128,22 @@ describe('MDLINKS', () => {
     mdlinks(ruta, { validate: true })
       .then((resp) => {
         expect(resp).toEqual(respTrue);
+        done();
       });
-    done();
   });
   it('mdlinks retorna hrfef, text,file', (done) => {
     mdlinks(ruta, { validate: false })
       .then((resp) => {
         expect(resp).toEqual(respFalse);
+        done();
       });
-    done();
   });
   it('Error', (done) => {
     mdlinks(ruta, { validate: 'otro' })
       .then((resp) => {
         expect(resp).toEqual(resp);
+        done();
       });
-    done();
   });
 });
 const totalunique = { Total: 2, Unique: 2 };
@@ -158,15 +158,15 @@ describe('STATS', () => {
     stats(ruta, false)
       .then((resp) => {
         expect(resp).toEqual(totalunique);
+        done();
       });
-    done();
   });
   it('stats total,unicos,rotos', (done) => {
     stats(ruta, true)
       .then((resp) => {
         expect(resp).toEqual(totaluniquebroken);
+        done();
       });
-    done();
   });
 });
 
@@ -175,35 +175,35 @@ describe('CLIOPTIONS', () => {
     clioptions()
       .then((resp) => {
         expect(resp).toEqual(resp);
+        done();
       });
-    done();
   });
   it('SI COLOCA MDLINKS + RUTA ', (done) => {
     clioptions(ruta)
       .then((resp) => {
         expect(resp).toEqual(resp);
+        done();
       });
-    done();
   });
   it('SI COLOCA MDLINKS + RUTA + validate', (done) => {
     clioptions(ruta, '--validate')
       .then((resp) => {
         expect(resp).toEqual(resp);
+        done();
       });
-    done();
   });
   it('SI COLOCA MDLINKS + RUTA + STATS', (done) => {
     clioptions(ruta, '--stats')
       .then((resp) => {
         expect(resp).toEqual(' Total: 2\n Unique: 2');
+        done();
       });
-    done();
   });
   it('SI COLOCA MDLINKS + RUTA + stats + validate', (done) => {
     clioptions(ruta, '--stats', '--validate')
       .then((resp) => {
         expect(resp).toEqual(' Total: 2\n Unique: 2\n Broken: 1');
+        done();
       });
-    done();
   });
 });
