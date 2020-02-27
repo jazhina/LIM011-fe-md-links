@@ -2,9 +2,6 @@
 
 const cli = require('../src/clioptions.js');
 
-/* const [,, ...args] = process.argv;
-console.log(`Hello World ${args}`); */
-
 const path = process.argv[2];
 const options = process.argv[3];
 const option2 = process.argv[4];

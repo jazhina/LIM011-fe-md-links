@@ -17,6 +17,7 @@ const archivo = (ruta) => fs.statSync(ruta).isFile();
 // Archivo MD
 const MD = (route) => path.extname(route) === '.md';
 
+
 // Guardar archivos MD en un arreglo
 const guardarArchivosMD = (route) => {
   let contenedor = [];
@@ -80,7 +81,7 @@ const validarlink = (route) => {
           };
           return obj;
         })
-        .catch((error) => console.log('Hubo un error', error)),
+        .catch(Error('Hubo un error')),
     );
   });
   return Promise.all(promesa);

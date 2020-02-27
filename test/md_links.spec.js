@@ -1,38 +1,48 @@
+const path = require('path');
+
 const objfns = require('../src/index.js');
 
 const mdlinks = require('../src/mdlinks.js');
 
 const stats = require('../src/stats.js');
 
+const clioptions = require('../src/clioptions.js');
+
+const ruta = path.join(process.cwd(), 'mds', 'example', 'read.md');
+
+const directorio = path.join(process.cwd(), 'mds', 'example');
+
+const noMD = path.join(process.cwd(), 'mds', 'app.js');
+
 describe('TRAER RUTA ABSOLUTA', () => {
   it('Convertir la ruta  absoluta', () => {
-    expect(objfns.verificar('./mds/example/read.md')).toBe('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md');
+    expect(objfns.verificar('mds/example/read.md')).toBe(ruta);
   });
   it('Verificar que la ruta sea absoluta', () => {
-    expect(objfns.verificar('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example')).toBe('/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example');
+    expect(objfns.verificar(ruta)).toBe(ruta);
   });
 });
 describe('REVISAR SI ES ARCHIVO O DIRECTORIO', () => {
   it('SI ES UN ARCHIVO REGRESA VERDADERO', () => {
-    expect(objfns.archivo('./mds/example/read.md')).toBe(true);
+    expect(objfns.archivo(ruta)).toBe(true);
   });
   it('SI ES UN DIRECTORIO REGRESA FALSO', () => {
-    expect(objfns.archivo('./mds/example')).toBe(false);
+    expect(objfns.archivo(directorio)).toBe(false);
   });
 });
 describe('REVISAR SI ES UN ARCHIVO MD', () => {
   it('ES UN ARCHIVO MD', () => {
-    expect(objfns.MD('./mds/example/read.md')).toBe(true);
+    expect(objfns.MD(ruta)).toBe(true);
   });
   it('NO ES UN ARCHIVO MD', () => {
-    expect(objfns.MD('./mds/example/index.html')).toBe(false);
+    expect(objfns.MD(noMD)).toBe(false);
   });
 });
 
-const respMD = ['/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/documento.md',
-  '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
-  '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/test/example.md',
-  '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/test/informes/info.md'];
+const respMD = [path.join(process.cwd(), 'mds', 'example', 'documento.md'),
+  path.join(process.cwd(), 'mds', 'example', 'read.md'),
+  path.join(process.cwd(), 'mds', 'example', 'test', 'example.md'),
+  path.join(process.cwd(), 'mds', 'example', 'test', 'informes', 'info.md')];
 
 describe('ARCHIVO GUARDA ARCHIVOS MD', () => {
   it('ES UN ARCHIVO MD', (done) => {
@@ -45,12 +55,12 @@ const ltr = [
   {
     href: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
   },
   {
     href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
   },
 ];
 describe('EXTRAER LINK, RUTA, TEXTO', () => {
@@ -63,14 +73,14 @@ const valida = [
   {
     href: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
     status: 200,
     message: 'OK',
   },
   {
     href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
     status: 404,
     message: 'FAIL',
   },
@@ -78,7 +88,7 @@ const valida = [
 
 describe('VALIDAR LINK', () => {
   it('VALIDAR LINK', (done) => {
-    objfns.validarlink('./mds/example/read.md')
+    objfns.validarlink(ruta)
       .then((resp) => {
         expect(resp).toEqual(valida);
         done();
@@ -89,14 +99,14 @@ const respTrue = [
   {
     href: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
     status: 200,
     message: 'OK',
   },
   {
     href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
     status: 404,
     message: 'FAIL',
   },
@@ -105,30 +115,33 @@ const respFalse = [
   {
     href: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
-    status: 200,
-    message: 'OK',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
   },
   {
     href: 'https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch1',
     text: 'FETCH',
-    file: '/home/jazmin/Desktop/Nuevo/LIM011-fe-md-links/mds/example/read.md',
-    status: 404,
-    message: 'FAIL',
+    file: path.join(process.cwd(), 'mds', 'example', 'read.md'),
   },
 ];
 describe('MDLINKS', () => {
   it('mdlinks retorna hrfef, text,file,status,mesage ', (done) => {
-    mdlinks('./mds/example/read.md', { validate: true })
+    mdlinks(ruta, { validate: true })
       .then((resp) => {
-        expect(mdlinks(resp)).toEqual(respTrue);
+        expect(resp).toEqual(respTrue);
       });
     done();
   });
   it('mdlinks retorna hrfef, text,file', (done) => {
-    mdlinks('./mds/example/read.md', { validate: false })
+    mdlinks(ruta, { validate: false })
       .then((resp) => {
-        expect(mdlinks(resp)).toEqual(respFalse);
+        expect(resp).toEqual(respFalse);
+      });
+    done();
+  });
+  it('Error', (done) => {
+    mdlinks(ruta, { validate: 'otro' })
+      .then((resp) => {
+        expect(resp).toEqual(resp);
       });
     done();
   });
@@ -142,16 +155,54 @@ const totaluniquebroken = {
 };
 describe('STATS', () => {
   it('stats total y unicos', (done) => {
-    stats('./mds/example/read.md', false)
+    stats(ruta, false)
       .then((resp) => {
-        expect(stats(resp)).toEqual(totalunique);
+        expect(resp).toEqual(totalunique);
       });
     done();
   });
   it('stats total,unicos,rotos', (done) => {
-    stats('./mds/example/read.md', true)
+    stats(ruta, true)
       .then((resp) => {
-        expect(stats(resp)).toEqual(totaluniquebroken);
+        expect(resp).toEqual(totaluniquebroken);
+      });
+    done();
+  });
+});
+
+describe('CLIOPTIONS', () => {
+  it('SI SOLO COLOCA MDLINKS', (done) => {
+    clioptions()
+      .then((resp) => {
+        expect(resp).toEqual(resp);
+      });
+    done();
+  });
+  it('SI COLOCA MDLINKS + RUTA ', (done) => {
+    clioptions(ruta)
+      .then((resp) => {
+        expect(resp).toEqual(resp);
+      });
+    done();
+  });
+  it('SI COLOCA MDLINKS + RUTA + validate', (done) => {
+    clioptions(ruta, '--validate')
+      .then((resp) => {
+        expect(resp).toEqual(resp);
+      });
+    done();
+  });
+  it('SI COLOCA MDLINKS + RUTA + STATS', (done) => {
+    clioptions(ruta, '--stats')
+      .then((resp) => {
+        expect(resp).toEqual(' Total: 2\n Unique: 2');
+      });
+    done();
+  });
+  it('SI COLOCA MDLINKS + RUTA + stats + validate', (done) => {
+    clioptions(ruta, '--stats', '--validate')
+      .then((resp) => {
+        expect(resp).toEqual(' Total: 2\n Unique: 2\n Broken: 1');
       });
     done();
   });

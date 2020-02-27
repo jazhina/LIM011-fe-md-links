@@ -1,22 +1,19 @@
 const valida = require('../src/index.js');
 
 const mdlinks = (path, options) => {
-  const Resp = new Promise((resolve, reject) => {
+  const Resp = new Promise((resolve) => {
     if (options.validate === true) {
       return resolve(valida.validarlink(path));
     }
-    if (options.validate === false) {
-      return resolve(valida.extraerlink(path));
-    }
-    return reject(Error('Hubo un Error'));
+    return resolve(valida.extraerlink(path));
   });
   return Resp;
 };
 
-mdlinks('./mds/example/read.md', { validate: false })
-  .then((resolve) => {
-    console.log(resolve);
-  });
+// mdlinks('./mds/example/read.md', { validate: false })
+//  .then((resolve) => {
+//    console.log(resolve);
+//  });
 
 module.exports = mdlinks;
 
