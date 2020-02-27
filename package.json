@@ -54,6 +54,6 @@
   "author": "JazminRojas",
   "license": "MIT",
   "bin": {
-    "mdlinks": "./src/cli.js"
+    "md-links": "./src/cli.js"
   }
 }

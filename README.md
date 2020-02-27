@@ -12,6 +12,13 @@ Es una herramienta creada usando Node.js, que lee y analiza archivos en formato 
 
 ![Diagrama de Flujo ](./DiagramaFlujo/DF.png)
 
+
+## INSTALACION
+
+$ npm i jazhina/md-links
+
+$ npm i --global jazhina/md-links
+
 ## GUIA DE USO
 
 ### COMO MODULO
