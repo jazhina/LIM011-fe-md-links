@@ -15,9 +15,9 @@ Es una herramienta creada usando Node.js, que lee y analiza archivos en formato 
 
 ## INSTALACION
 
-$ npm i jazhina/md-links
+$ npm i jazhina/LIM011-fe-md-links
 
-$ npm i --global jazhina/md-links
+$ npm i --global jazhina/LIM011-fe-md-links
 
 ## GUIA DE USO
 
