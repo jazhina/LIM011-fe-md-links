@@ -1,9 +1,20 @@
 # Markdown Links
 
+Markdown es un lenguaje de marcado ligero muy popular entre los desarrolladores. Es usado en muchas plataformas que manejan texto plano (GitHub, foros, blogs, ...), y es muy común encontrar varios archivos en ese formato en cualquier tipo de repositorio (empezando por el tradicional README.md).
+
+Estos archivos Markdownnormalmente contienen enlaces ( enlaces / ligas) que muchas veces están rotos o no son válidos y eso perjudica mucho el valor de la información que se quiere compartir.
+
+Dentro de una comunidad de código abierto, nos han propuesto crear una herramienta usando Node.js , que lea y analice archivos en formato Markdown, para verificar los enlaces que contengan y reportar algunas estadísticas.
+
 Es una herramienta creada usando Node.js, que lee y analiza archivos en formato Markdown, para verificar los links que se encuentren en el interior de un directorio o archivo.
 
-#### GUIA DE USO
+## DIAGRAMA DE FLUJO
 
+![Diagrama de Flujo ](./DiagramaFlujo/DF.png)
+
+## GUIA DE USO
+
+### COMO MODULO
 ```js
 const mdLinks = require("md-links");
 
